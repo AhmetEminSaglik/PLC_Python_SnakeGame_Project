@@ -1,0 +1,18 @@
+    Giderilen Sorunlar : 
+-180 derece yon degistirebiliyordu engellendi
+-Donerken zit 2 tuslardan birini once digerini sonra basinca 2. bastigi dogrultuda gidiyordu engellendi
+
+   Eklenenler:
+- Seftali Eklendi ve onla birlikte  skor artisi eklendi
+- Zehir/Zehirler eklendi, skor azaltma/kaybetme eklendi
+- Skor hesaplama degistirildi,
+
+
+Devam Eden Sorunlar :
+         1-)  Bazen sol ust kosede 0,0 noktasinda 1 tane yilan karesi gorunup kayboluyor. Senaryo soyle gerceklesiyor : 
+		 Yilanin boyutunu 1 kere artirmak yerine 2 veya daha fazla pes pese artirmaya calisinca sol ust kosede eklenecek 
+		yilan karesi sayisi kadar ust uste biniyor ve eklendikce ust ustte binen karelerin sayisi azaliyor. 
+
+         2-)  Zehirler ve Seftaliler gorunmez oluyor haritada --> (1 kere draw yapilinca sistemde olusturuluyorlar ancak resimleri kayboluyor, ama surekli draw yapilirsa o zaman sistemden kaldirilana kadar gorunuyorlar)
+		 
+   	 3-) Yilanin icine ya da ust uste  gorseller binebiliyor.
