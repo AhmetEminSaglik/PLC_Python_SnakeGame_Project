@@ -13,7 +13,7 @@ PEACH   : - Gains you much more score,
 POISON  : - Lose so much score and if your score  under 0 then game over 
          snake moves opposited direction with  direction keys.
          This opposited moves go on until eat peach.
-         - Poison number will increase by snake length
+        <br> - Poison number will increase by snake length
 
 
          
