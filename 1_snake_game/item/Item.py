@@ -5,23 +5,25 @@ from snake.Snake import Snake
 from fundamental.GameFundamental import SIZE
 
 
-class Item(Snake):
+class Item(ABC, Snake):
+    ItemSpecialModValue = -1
 
     def __init__(self, parent_screen):
         self.parent_screen = parent_screen
         self.image = ""
         self.foodIsCreated = False
         self.setImage(self.getImagePath())
-        self.snake =Snake
+        self.snake = Snake
 
     def draw(self):
         self.parent_screen.blit(self.image, (self.x, self.y))
         pygame.display.flip()
 
     def move(self):
-        self.x = int(random.randint(1, 7) * 3) * SIZE  # (int(random.randint(1, 7) * 3) + 2) * SIZE
+        self.x = (int(random.randint(1, 7) * 3) +
+                  self.ItemSpecialModValue) * SIZE
         self.y = (int(random.randint(1, 19) / 2)) * SIZE
-
+        self.foodIsCreated = True
 
     def setImage(self, imagePath):
         self.image = pygame.image.load(imagePath).convert()
@@ -29,6 +31,9 @@ class Item(Snake):
     @abstractmethod
     def getImagePath(self):
         pass
+
+    # def getSize(self):
+    #     return SIZE
 
     # def refactorItemLocation(self):
     #     self.snake= Snake
@@ -43,6 +48,3 @@ class Item(Snake):
     #             self.refactorItemLocation()
     #             print("Fonk Bitecek")
     #             return
-
-    def getSize(self):
-        return SIZE

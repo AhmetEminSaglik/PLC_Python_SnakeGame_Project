@@ -37,6 +37,7 @@ class Snake:
     def walk(self):
         # update body
         for i in range(self.length - 1, 0, -1):
+            # print("Yurumeye geldik : i  ",i,"x[i]",self.x[i],"y[i]",self.y[i])
             self.x[i] = self.x[i - 1]
             self.y[i] = self.y[i - 1]
 
@@ -62,8 +63,8 @@ class Snake:
 
     def increase_length(self):
         self.length += 1
-        self.x.append(-1)
-        self.y.append(-1)
+        self.x.append(+1)
+        self.y.append(+1)
 
     def getLenght(self):
         return self.length
