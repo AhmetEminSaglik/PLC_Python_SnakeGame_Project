@@ -1,129 +1,17 @@
-# Add background image and music
-
 import pygame
-from pygame.locals import *
 import time
-import random
+from fundamental import GameFundamental
+from pygame.locals import *
 
+from item.Apple import Apple
+from item.Peach import Peach
+from item.Poison import Poison
+from snake.Snake import \
+    Snake  # TypeError: 'module' object is not callable  hatasini bu sekilde cozebildik internetten aratinca --> Module erisim sagliyor
 
-SIZE = 40
 BACKGROUND_COLOR = (110, 110, 5)
 
-
-class Apple:
-    def __init__(self, parent_screen):
-        self.parent_screen = parent_screen
-        self.image = pygame.image.load("resources/apple.jpg").convert()
-        self.move()
-
-    def draw(self):
-        self.parent_screen.blit(self.image, (self.x, self.y))
-        pygame.display.flip()
-
-    def move(self):
-        self.x = (int(random.randint(1, 7) * 3) + 0) * SIZE
-        self.y = (int(random.randint(1, 19) / 2)) * SIZE
-
-
-class Peach:
-    def __init__(self, parent_screen):
-        self.parent_screen = parent_screen
-        self.image = pygame.image.load("resources/peach.jpg").convert()
-        self.foodIsCreated = False
-
-    def draw(self):
-        self.parent_screen.blit(self.image, (self.x, self.y))
-        pygame.display.flip()
-
-    def move(self):
-        self.x = (int(random.randint(1, 7) * 3) + 1) * SIZE
-        self.y = (int(random.randint(1, 19) / 2)) * SIZE
-        self.foodIsCreated = True
-
-
-class Poison:
-    def __init__(self, parent_screen):
-        self.parent_screen = parent_screen
-        self.image = pygame.image.load("resources/poison.jpg").convert()
-        self.foodIsCreated = False
-
-    def draw(self):
-        self.parent_screen.blit(self.image, (self.x, self.y))
-        pygame.display.flip()
-
-    def move(self):
-        self.x = (int(random.randint(1, 7) * 3) + 2) * SIZE
-        self.y = (int(random.randint(1, 19) / 2)) * SIZE
-        self.foodIsCreated = True
-
-
-class Score:
-    totalScore = 0
-    appleScore = 10
-    peachScore = 150
-    poisonScore = -22
-
-
-class Snake:
-    def __init__(self, parent_screen):
-        self.parent_screen = parent_screen
-        self.image = pygame.image.load("resources/block.jpg").convert()
-        self.direction = 'down'
-
-        self.length = 1
-        self.x = [40]
-        self.y = [40]
-        self.movedInThisDirection = True
-
-    def move_left(self):
-        if self.direction != 'right':
-            self.direction = 'left'
-
-    def move_right(self):
-        if self.direction != 'left':
-            self.direction = 'right'
-
-    def move_up(self):
-        if self.direction != 'down':
-            self.direction = 'up'
-
-    def move_down(self):
-        if self.direction != 'up':
-            self.direction = 'down'
-
-    def movedInDirection(self):
-        self.movedInThisDirection = True
-
-    def walk(self):
-        # update body
-        for i in range(self.length - 1, 0, -1):
-            self.x[i] = self.x[i - 1]
-            self.y[i] = self.y[i - 1]
-
-        # update head
-
-        if self.direction == 'left':
-            self.x[0] -= SIZE
-        if self.direction == 'right':
-            self.x[0] += SIZE
-        if self.direction == 'up':
-            self.y[0] -= SIZE
-        if self.direction == 'down':
-            self.y[0] += SIZE
-
-        self.movedInDirection()
-        self.draw()
-
-    def draw(self):
-        for i in range(self.length):
-            self.parent_screen.blit(self.image, (self.x[i], self.y[i]))
-
-        pygame.display.flip()
-
-    def increase_length(self):
-        self.length += 1
-        self.x.append(-1)
-        self.y.append(-1)
+SIZE = GameFundamental.SIZE
 
 
 class Game:
@@ -161,7 +49,7 @@ class Game:
         self.apple = Apple(self.surface)
         self.peach = Peach(self.surface)
         self.poison = [Poison(self.surface)]
-        self.snakeConfused=False
+        self.snakeConfused = False
         self.score.totalScore = 0
 
     def is_collision(self, x1, y1, x2, y2):
@@ -222,7 +110,6 @@ class Game:
             self.peach.move()
             self.peach.foodIsCreated = False
 
-
             self.apple.move()
 
         if self.peach.foodIsCreated == True and self.is_collision(self.snake.x[0], self.snake.y[0], self.peach.x,
@@ -231,7 +118,7 @@ class Game:
             self.snake.increase_length()
             self.score.totalScore += self.score.peachScore;
             # self.peach.move()
-            self.snakeConfused=False
+            self.snakeConfused = False
             self.peach.foodIsCreated = False
 
         for i in range(len(self.poison)):
@@ -249,6 +136,7 @@ class Game:
         for i in range(3, self.snake.length):
             # print("x:  ", self.snake.x[i], " y:  ", self.snake.y[i])
             if self.is_collision(self.snake.x[0], self.snake.y[0], self.snake.x[i], self.snake.y[i]):
+                print(self.snake.x[0]," ",self.snake.y[0]," " ,self.snake.x[i]," ", self.snake.y[i])
                 self.play_sound('crash')
                 raise "Collision Occurred"
 
@@ -273,7 +161,7 @@ class Game:
         pygame.display.flip()
 
     def clearAllPoison(self):
-        print("temizlenecek posion sayisi ", len(self.poison))
+        # print("temizlenecek posion sayisi ", len(self.poison))
         # time.sleep(1)
         for i in range(len(self.poison)):
             self.poison[i].foodIsCreated = False
@@ -329,7 +217,8 @@ class Game:
                                 self.snake.movedInThisDirection = False
 
                         # else:
-                        # print("TIKANDIKKKK deger : ", self.movedInThisDirection)
+                        #
+                        # ("TIKANDIKKKK deger : ", self.movedInThisDirection)
 
                 elif event.type == QUIT:
                     running = False
@@ -347,6 +236,8 @@ class Game:
             time.sleep(.1)
 
 
-if __name__ == '__main__':
-    game = Game()
-    game.run()
+class Score:
+    totalScore = 0
+    appleScore = 10
+    peachScore = 150
+    poisonScore = -100
