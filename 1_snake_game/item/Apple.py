@@ -1,6 +1,5 @@
 from typing import Final
 
-from snake.Snake import Snake
 from .Item import Item
 
 

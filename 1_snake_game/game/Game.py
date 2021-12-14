@@ -6,8 +6,7 @@ from pygame.locals import *
 from item.Apple import Apple
 from item.Peach import Peach
 from item.Poison import Poison
-from snake.Snake import \
-    Snake  # TypeError: 'module' object is not callable  hatasini bu sekilde cozebildik internetten aratinca --> Module erisim sagliyor
+from snake.Snake import Snake  # TypeError: 'module' object is not callable  hatasini bu sekilde cozebildik internetten aratinca --> Module erisim sagliyor
 
 BACKGROUND_COLOR = (110, 110, 5)
 
@@ -93,9 +92,6 @@ class Game:
             if self.poison[i].foodIsCreated == False:
                 self.poison[i].move()
                 self.poison[i].draw()
-                # print("Olusturulan poison  [", i, "] x : ", self.poison[i].x, " y : ", self.poison[i].y)
-
-                # time.sleep(len(self.poison) / 4)
 
         self.display_score()
         pygame.display.flip()
@@ -161,8 +157,6 @@ class Game:
         pygame.display.flip()
 
     def clearAllPoison(self):
-        # print("temizlenecek posion sayisi ", len(self.poison))
-        # time.sleep(1)
         for i in range(len(self.poison)):
             self.poison[i].foodIsCreated = False
 
@@ -215,10 +209,6 @@ class Game:
                                 else:
                                     self.snake.move_up()
                                 self.snake.movedInThisDirection = False
-
-                        # else:
-                        #
-                        # ("TIKANDIKKKK deger : ", self.movedInThisDirection)
 
                 elif event.type == QUIT:
                     running = False

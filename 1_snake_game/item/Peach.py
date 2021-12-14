@@ -15,7 +15,6 @@ class Peach(Item):
     def move(self):
         super(Peach, self).move()
         self.x += PeachModValue * self.getSize()
-        # super().refactorItemLocation()
         self.foodIsCreated = True
 
     def getImagePath(self):
