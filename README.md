@@ -4,7 +4,15 @@ You can go the original project by this  link
 
 Added new items : 
 
-Peach, poison.
+Peach, poison. 
+
+Changed Features : 
+In the original code snake was able to move back on forth through itself. We were able to 
+change it with our improvements. Snake, now can't move through itself.
+Snake's head and body is changed.
+Game finish screen is changed.
+
+
 
 <h4><b> PEACH :</b></h4>
 - Gains much more score.
