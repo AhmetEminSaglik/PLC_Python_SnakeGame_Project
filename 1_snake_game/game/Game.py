@@ -57,12 +57,12 @@ class Game:
                 return True
         return False
 
-    def render_background(self):
-        bg = pygame.image.load("resources/background.jpg")
+    def render_background(self,path):
+        bg = pygame.image.load(path)
         self.surface.blit(bg, (0, 0))
 
     def play(self):
-        self.render_background()
+        self.render_background("resources/background.jpg")
         self.snake.walk()
         self.apple.draw()
 
@@ -117,6 +117,7 @@ class Game:
             self.snakeConfused = False
             self.peach.foodIsCreated = False
 
+
         for i in range(len(self.poison)):
             if self.poison[i].foodIsCreated == True and self.is_collision(self.snake.x[0], self.snake.y[0],
                                                                           self.poison[i].x,
@@ -147,7 +148,7 @@ class Game:
         self.surface.blit(score, (850, 10))
 
     def show_game_over(self):
-        self.render_background()
+        self.render_background("resources/gameover.jpg")
         font = pygame.font.SysFont('arial', 30)
         line1 = font.render(f"Game is over! Your score is {self.score.totalScore}", True, (255, 255, 255))
         self.surface.blit(line1, (200, 300))

@@ -7,7 +7,8 @@ SIZE = GameFundamental.SIZE
 class Snake:
     def __init__(self, parent_screen):
         self.parent_screen = parent_screen
-        self.image = pygame.image.load("resources/block.jpg").convert()
+        self.imageHead = pygame.image.load("resources/snakeHead.png").convert()
+        self.imageBody = pygame.image.load("resources/snakeBody.png").convert()
         self.direction = 'down'
 
         self.length = 1
@@ -57,7 +58,10 @@ class Snake:
 
     def draw(self):
         for i in range(self.length):
-            self.parent_screen.blit(self.image, (self.x[i], self.y[i]))
+            if i == 0:
+                self.parent_screen.blit(self.imageHead, (self.x[i], self.y[i]))
+            else:
+                self.parent_screen.blit(self.imageBody, (self.x[i], self.y[i]))
 
         pygame.display.flip()
 
