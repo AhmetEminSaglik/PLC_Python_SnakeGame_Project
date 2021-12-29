@@ -12,8 +12,8 @@ class Snake:
         self.direction = 'down'
 
         self.length = 1
-        self.x = [40]
-        self.y = [40]
+        self.x = [SIZE]
+        self.y = [SIZE]
         self.movedInThisDirection = True
 
     def move_left(self):
