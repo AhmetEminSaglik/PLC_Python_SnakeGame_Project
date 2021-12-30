@@ -16,7 +16,7 @@ SIZE = GameFundamental.SIZE
 class Game:
     def __init__(self):
         pygame.init()
-        pygame.display.set_caption("Snake Game_ Ahmet Emin SAGLIK/ Emirhan Dogandemir")
+        pygame.display.set_caption("Programlama Dili kavramlari Dersi final proje odevi")
 
         pygame.mixer.init()
         self.play_background_music()
