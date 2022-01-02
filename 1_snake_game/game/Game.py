@@ -8,7 +8,7 @@ from item.Peach import Peach
 from item.Poison import Poison
 from snake.Snake import Snake  # TypeError: 'module' object is not callable  hatasini bu sekilde cozebildik internetten aratinca --> Module erisim sagliyor
 
-BACKGROUND_COLOR = (110, 110, 5)
+# BACKGROUND_COLOR = (110, 110, 5)
 
 SIZE = GameFundamental.SIZE
 
@@ -41,7 +41,6 @@ class Game:
             sound = pygame.mixer.Sound("resources/ding.mp3")
 
         pygame.mixer.Sound.play(sound)
-        # pygame.mixer.music.stop()
 
     def reset(self):
         self.snake = Snake(self.surface)
@@ -75,29 +74,23 @@ class Game:
             self.peach.draw()
 
         for i in range(len(self.poison)):
-            # print("For a girdik : ")
             if self.poison[i].foodIsCreated == True:
                 self.poison[i].draw()
-                # print("Olusturulan poison  [", i, "] x : ", self.poison[i].x, " y : ", self.poison[i].y)
-                # time.sleep(len(self.poison) / 4)
 
         if self.snake.length % 2 == 0:
+
             poisonNumber = int(self.snake.length / 2)
-            # print("Poison Number : ", poisonNumber)
             if len(self.poison) < poisonNumber:
                 self.poison.append(Poison(self.surface))
 
         for i in range(len(self.poison)):
-            # print("For a girdik : ")
-            if self.poison[i].foodIsCreated == False:
+            if self.snake.length>1 and self.poison[i].foodIsCreated == False:
                 self.poison[i].move()
                 self.poison[i].draw()
 
         self.display_score()
         pygame.display.flip()
 
-        # snake eating apple scenario
-        # for i in range(self.snake.length):
         if self.is_collision(self.snake.x[0], self.snake.y[0], self.apple.x, self.apple.y):
             self.play_sound("ding")
             self.snake.increase_length()
@@ -129,15 +122,12 @@ class Game:
             if (self.score.totalScore < 0):
                 raise "Lost Too much Score"
 
-        # snake colliding with itself
         for i in range(3, self.snake.length):
-            # print("x:  ", self.snake.x[i], " y:  ", self.snake.y[i])
             if self.is_collision(self.snake.x[0], self.snake.y[0], self.snake.x[i], self.snake.y[i]):
                 print(self.snake.x[0]," ",self.snake.y[0]," " ,self.snake.x[i]," ", self.snake.y[i])
                 self.play_sound('crash')
                 raise "Collision Occurred"
 
-        # snake colliding with the boundries of the window
         if not (0 <= self.snake.x[0] < 1000 and 0 <= self.snake.y[0] < 800):
             self.play_sound('crash')
             raise "Hit the boundry error"
